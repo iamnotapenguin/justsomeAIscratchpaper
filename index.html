@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SheetForge — Web Spreadsheet</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">SheetForge</div>
+      <div class="toolbar">
+        <button id="newSheetBtn">New Workbook</button>
+        <button id="saveBtn">Save</button>
+        <button id="loadBtn">Load</button>
+        <button id="undoBtn" title="Undo (Ctrl+Z)">Undo</button>
+        <button id="redoBtn" title="Redo (Ctrl+Y / Ctrl+Shift+Z)">Redo</button>
+        <button id="functionsCatalogBtn" title="Show supported functions">Functions</button>
+        <button id="downloadCsvBtn">Export CSV</button>
+        <button id="downloadXlsxBtn">Export XLSX</button>
+        <label class="import-label" for="importCsvInput">Import CSV</label>
+        <input id="importCsvInput" type="file" accept=".csv,text/csv" />
+        <label class="import-label" for="importXlsxInput">Import XLSX</label>
+        <input id="importXlsxInput" type="file" accept=".xlsx,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" />
+      </div>
+    </header>
+
+    <section class="formula-row">
+      <div class="cell-address" id="cellAddress">A1</div>
+      <input id="formulaInput" type="text" placeholder="Enter value or formula (e.g. =SUM(A1:A10))" />
+      <div class="format-controls">
+        <button id="boldBtn" title="Bold"><strong>B</strong></button>
+        <button id="italicBtn" title="Italic"><em>I</em></button>
+        <label>
+          Text
+          <input id="textColorInput" type="color" value="#1f2933" />
+        </label>
+        <label>
+          Fill
+          <input id="fillColorInput" type="color" value="#ffffff" />
+        </label>
+      </div>
+    </section>
+
+    <section class="freeze-row">
+      <strong>Freeze panes:</strong>
+      <label>
+        Rows
+        <input id="freezeRowsInput" type="number" min="0" max="99" value="0" />
+      </label>
+      <label>
+        Columns
+        <input id="freezeColsInput" type="number" min="0" max="25" value="0" />
+      </label>
+      <button id="applyFreezeBtn">Apply Freeze</button>
+    </section>
+
+    <main class="sheet-wrap" id="sheetWrap">
+      <table id="sheetTable"></table>
+      <div id="fillHandle" class="fill-handle" title="Drag to fill"></div>
+    </main>
+
+    <section id="functionsCatalogPanel" class="catalog-panel hidden">
+      <div class="catalog-header">
+        <strong>Function Catalog</strong>
+        <button id="functionsCatalogCloseBtn">Close</button>
+      </div>
+      <input id="catalogSearchInput" type="text" placeholder="Search function name..." />
+      <div id="catalogList" class="catalog-list"></div>
+    </section>
+
+    <section class="tabsbar">
+      <div id="sheetTabs" class="sheet-tabs"></div>
+      <button id="addSheetBtn" title="Add sheet">+ Sheet</button>
+    </section>
+
+    <footer class="statusbar">
+      <div id="statusText">Ready</div>
+      <div id="selectionMetrics">No selection</div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
