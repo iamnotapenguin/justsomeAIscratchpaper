@@ -1,0 +1,85 @@
+:root {
+  --bg: #f2f5f8;
+  --panel: #ffffff;
+  --line: #d6dee7;
+  --line-dark: #9eb0c1;
+  --text: #1f2933;
+  --muted: #5f7387;
+  --accent: #1565d8;
+  --header: #eef4fb;
+  --selected: #e4f0ff;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.topbar,.formula-row,.freeze-row,.tabsbar,.statusbar,.catalog-panel {
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+}
+.topbar { display:flex; justify-content:space-between; align-items:center; padding:0.75rem 1rem; }
+.brand { font-weight:700; font-size:1.05rem; }
+.toolbar { display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap; }
+button,.import-label {
+  background:#fff; border:1px solid var(--line); border-radius:0.4rem; padding:0.4rem 0.75rem; cursor:pointer; font-size:0.9rem;
+}
+button:hover,.import-label:hover { border-color: var(--line-dark); }
+#importCsvInput,#importXlsxInput { display:none; }
+
+.formula-row { display:grid; grid-template-columns:80px 1fr auto; align-items:center; gap:0.5rem; padding:0.5rem 1rem; }
+.freeze-row { display:flex; align-items:center; gap:0.5rem; padding:0.45rem 1rem; }
+.freeze-row label { font-size:0.85rem; color:var(--muted); display:inline-flex; gap:0.3rem; align-items:center; }
+.freeze-row input,#catalogSearchInput { width:120px; border:1px solid var(--line); border-radius:0.35rem; padding:0.3rem; }
+
+.cell-address { border:1px solid var(--line); border-radius:0.4rem; padding:0.4rem 0.5rem; background:#fbfdff; text-align:center; font-weight:600; }
+#formulaInput { border:1px solid var(--line); border-radius:0.4rem; padding:0.5rem; font-size:0.95rem; }
+.format-controls { display:flex; align-items:center; gap:0.45rem; }
+.format-controls label { font-size:0.8rem; color:var(--muted); display:flex; align-items:center; gap:0.3rem; }
+
+.sheet-wrap { padding:1rem; overflow:auto; flex:1; position:relative; }
+#sheetTable { border-collapse:collapse; background:var(--panel); min-width:1200px; }
+.header-cell {
+  position:sticky; top:0; z-index:4; background:var(--header); color:var(--muted); font-weight:600; text-align:center;
+  border:1px solid var(--line); min-width:95px; height:28px; user-select:none;
+}
+.row-header {
+  position:sticky; left:0; z-index:3; background:var(--header); color:var(--muted); text-align:center;
+  border:1px solid var(--line); width:46px; min-width:46px;
+}
+.corner { left:0; z-index:7; }
+.sheet-cell { border:1px solid var(--line); min-width:95px; height:28px; padding:0.2rem 0.4rem; outline:none; background:#fff; }
+.sheet-cell:focus { box-shadow: inset 0 0 0 2px var(--accent); }
+.sheet-cell.selected { background: var(--selected); }
+.sheet-cell.range-selected { background:#eef5ff; }
+
+.frozen-cell { position:sticky; z-index:2; box-shadow:1px 0 0 0 #c7d7e8,0 1px 0 0 #c7d7e8; }
+.resize-handle { position:absolute; right:-2px; top:0; width:6px; height:100%; cursor:col-resize; user-select:none; }
+.header-cell.resizable { position:sticky; }
+
+.fill-handle {
+  position:absolute; width:8px; height:8px; background:var(--accent); border:1px solid #fff; box-shadow:0 0 0 1px var(--accent);
+  border-radius:1px; display:none; cursor:crosshair; z-index:9;
+}
+
+.catalog-panel { border-top:1px solid var(--line); padding:0.5rem 0.75rem; max-height:230px; overflow:auto; }
+.catalog-panel.hidden { display:none; }
+.catalog-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem; }
+.catalog-list { display:grid; gap:0.4rem; margin-top:0.5rem; }
+.catalog-item { border:1px solid var(--line); border-radius:0.35rem; padding:0.35rem 0.5rem; background:#fbfdff; }
+.catalog-item code { font-size:0.82rem; color:#1d4f9f; }
+.catalog-item p { margin:0.2rem 0 0; color:var(--muted); font-size:0.8rem; }
+
+.tabsbar { display:flex; gap:0.5rem; align-items:center; justify-content:space-between; padding:0.35rem 0.75rem; }
+.sheet-tabs { display:flex; gap:0.4rem; overflow-x:auto; scrollbar-width:thin; flex:1; }
+.sheet-tab { border:1px solid var(--line); border-radius:0.45rem; padding:0.3rem 0.6rem; background:#fff; color:var(--muted); font-size:0.85rem; white-space:nowrap; }
+.sheet-tab.active { color:var(--accent); border-color:#adc8f2; background:#edf4ff; font-weight:600; }
+
+.statusbar { display:flex; justify-content:space-between; align-items:center; font-size:0.85rem; color:var(--muted); padding:0.4rem 1rem; border-top:1px solid var(--line); }
